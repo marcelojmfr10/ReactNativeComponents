@@ -10,8 +10,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import ThemedText from "@/presentation/shared/ThemedText";
-import ThemedView from "@/presentation/shared/ThemedView";
+import { allRoutes } from "@/constants/Routes";
+import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "../global.css";
 
@@ -41,24 +41,27 @@ export default function RootLayout() {
       style={{ backgroundColor: backgroundColor, flex: 1 }}
     >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <ThemedView margin>
-          <ThemedText className="mt-20" type="h1">
-            hola mundo
-          </ThemedText>
-        </ThemedView>
-        {/* <Stack
+        <Stack
           screenOptions={{
             headerShadowVisible: false,
             contentStyle: {
-              backgroundColor: "pink",
+              backgroundColor: backgroundColor,
             },
             headerStyle: {
-              backgroundColor: "pink",
+              backgroundColor: backgroundColor,
             },
           }}
         >
-          <Stack.Screen name="index" options={{ title: "Inicio" }} />s
-        </Stack> */}
+          <Stack.Screen name="index" options={{ title: "Inicio" }} />
+
+          {allRoutes.map((route) => (
+            <Stack.Screen
+              key={route.name}
+              name={route.name}
+              options={{ title: route.title }}
+            />
+          ))}
+        </Stack>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
