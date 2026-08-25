@@ -66,11 +66,11 @@ export const ThemeChangerProvider = ({ children }: PropsWithChildren) => {
           bgColor: backgroundColor,
           toggleTheme: async () => {
             setIsDarkMode(!isDarkMode);
-            setColorScheme(isDarkMode ? "dark" : "light");
+            setColorScheme(isDarkMode ? "light" : "dark");
             setIsSystemThemeEnabled(false);
             await AsyncStorage.setItem(
               "selected-theme",
-              isDarkMode ? "dark" : "light",
+              isDarkMode ? "light" : "dark",
             );
           },
           setSystemTheme: async () => {
